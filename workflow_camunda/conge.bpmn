@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.1">
+   <bpmn:process id="Workflow_Conge" name="Gestion des demandes de congé" isExecutable="true" camunda:historyTimeToLive="P30D">
+     <bpmn:startEvent id="StartEvent_1" name="Start Leave Request">
+       <bpmn:extensionElements>
+         <camunda:formData>
+           <camunda:formField id="employeId" label="ID Employé" type="string" required="true" />
+           
+           <camunda:formField id="commentaire" label="Commentaire" type="string" />
+           <camunda:formField id="emailDestinataire" label="email destinataire" type="string" />
+         </camunda:formData>
+       </bpmn:extensionElements>
+       <bpmn:outgoing>Flow_1</bpmn:outgoing>
+     </bpmn:startEvent>
+<bpmn:userTask id="UserTask_ValidationManager"
+            name="Manager Validation"
+               camunda:assignee="${managerId}">       <bpmn:extensionElements>
+         <camunda:formData>
+           <camunda:formField id="decisionManager" label="Décision" type="enum" required="true">
+             <camunda:properties>
+               <camunda:property id="APPROUVER" value="Approuver" />
+               <camunda:property id="REJETER" value="Rejeter" />
+             </camunda:properties>
+           </camunda:formField>
+           <camunda:formField id="commentaireManager" label="Commentaire" type="string" required="true" />
+         </camunda:formData>
+       </bpmn:extensionElements>
+       <bpmn:incoming>Flow_1</bpmn:incoming>
+       <bpmn:outgoing>Flow_2</bpmn:outgoing>
+     </bpmn:userTask>
+     <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="UserTask_ValidationManager" />
+     <bpmn:sequenceFlow id="Flow_2" sourceRef="UserTask_ValidationManager" targetRef="Gateway_ValidationManager" />
+     <bpmn:exclusiveGateway id="Gateway_ValidationManager" name="Décision Manager">
+       <bpmn:incoming>Flow_2</bpmn:incoming>
+       <bpmn:outgoing>Flow_4</bpmn:outgoing>
+       <bpmn:outgoing>Flow_RejetManager</bpmn:outgoing>
+     </bpmn:exclusiveGateway>
+     <bpmn:sequenceFlow id="Flow_4" sourceRef="Gateway_ValidationManager" targetRef="UserTask_ValidationRH" camunda:candidateGroups="rh">
+       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">
+   ${decisionManager != null and decisionManager == "APPROUVER"}
+ 
+ </bpmn:conditionExpression>
+     </bpmn:sequenceFlow>
+     <bpmn:sequenceFlow id="Flow_RejetManager" sourceRef="Gateway_ValidationManager" targetRef="ServiceTask_EmailRejetManager">
+       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decisionManager == "REJETER"}</bpmn:conditionExpression>
+     </bpmn:sequenceFlow>
+     <bpmn:serviceTask id="ServiceTask_EmailRejetManager" name="Send Manager Rejection Email" camunda:type="external" camunda:topic="send-rejection-email">
+       <bpmn:extensionElements>
+         <camunda:inputOutput>
+           <camunda:inputParameter name="employeId">${employeId}</camunda:inputParameter>
+           <camunda:inputParameter name="commentaireManager">${commentaireManager}</camunda:inputParameter>
+         </camunda:inputOutput>
+       </bpmn:extensionElements>
+       <bpmn:incoming>Flow_RejetManager</bpmn:incoming>
+       <bpmn:outgoing>Flow_EndRejetManager</bpmn:outgoing>
+     </bpmn:serviceTask>
+     <bpmn:endEvent id="EndEvent_RejetManager" name="End -  Manager Rejection">
+       <bpmn:incoming>Flow_EndRejetManager</bpmn:incoming>
+     </bpmn:endEvent>
+     <bpmn:sequenceFlow id="Flow_EndRejetManager" sourceRef="ServiceTask_EmailRejetManager" targetRef="EndEvent_RejetManager" />
+     <bpmn:userTask id="UserTask_ValidationRH" name="HR Validation">
+       <bpmn:extensionElements>
+         <camunda:formData>
+           <camunda:formField id="decisionRH" label="Décision" type="enum" required="true">
+             <camunda:properties>
+               <camunda:property id="APPROUVER" value="Approuver" />
+               <camunda:property id="REJETER" value="Rejeter" />
+             </camunda:properties>
+           </camunda:formField>
+           <camunda:formField id="commentaireRH" label="Commentaire" type="string" required="true" />
+         </camunda:formData>
+       </bpmn:extensionElements>
+       <bpmn:incoming>Flow_4</bpmn:incoming>
+       <bpmn:outgoing>Flow_5</bpmn:outgoing>
+     </bpmn:userTask>
+     <bpmn:sequenceFlow id="Flow_5" sourceRef="UserTask_ValidationRH" targetRef="Gateway_ValidationRH" />
+     <bpmn:exclusiveGateway id="Gateway_ValidationRH" name="Décision RH">
+       <bpmn:incoming>Flow_5</bpmn:incoming>
+       <bpmn:outgoing>Flow_ApprouveRH</bpmn:outgoing>
+       <bpmn:outgoing>Flow_RejetRH</bpmn:outgoing>
+     </bpmn:exclusiveGateway>
+     <bpmn:sequenceFlow id="Flow_ApprouveRH" sourceRef="Gateway_ValidationRH" targetRef="ServiceTask_SendFinalApprovalEmail">
+       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decisionRH == "APPROUVER"}</bpmn:conditionExpression>
+     </bpmn:sequenceFlow>
+     <bpmn:serviceTask id="ServiceTask_SendFinalApprovalEmail" name="Send Final Approval Email" camunda:type="external" camunda:topic="send-final-approval-email">
+       <bpmn:extensionElements>
+         <camunda:inputOutput>
+           <camunda:inputParameter name="employeId">${employeId}</camunda:inputParameter>
+           <camunda:inputParameter name="commentaireRH">${commentaireRH}</camunda:inputParameter>
+         </camunda:inputOutput>
+       </bpmn:extensionElements>
+       <bpmn:incoming>Flow_ApprouveRH</bpmn:incoming>
+       <bpmn:outgoing>Flow_FinalEmailToEnd</bpmn:outgoing>
+     </bpmn:serviceTask>
+     <bpmn:sequenceFlow id="Flow_FinalEmailToEnd" sourceRef="ServiceTask_SendFinalApprovalEmail" targetRef="EndEvent_FinalApprouve" />
+     <bpmn:endEvent id="EndEvent_FinalApprouve" name="Leave Approved - Email Sent">
+       <bpmn:incoming>Flow_FinalEmailToEnd</bpmn:incoming>
+     </bpmn:endEvent>
+     <bpmn:sequenceFlow id="Flow_RejetRH" sourceRef="Gateway_ValidationRH" targetRef="ServiceTask_EmailRejetRH">
+       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decisionRH == "REJETER"}</bpmn:conditionExpression>
+     </bpmn:sequenceFlow>
+     <bpmn:serviceTask id="ServiceTask_EmailRejetRH" name="Send HR Rejection Email" camunda:type="external" camunda:topic="send-rejection-email">
+       <bpmn:extensionElements>
+         <camunda:inputOutput>
+           <camunda:inputParameter name="emailDestinataire">${emailDestinataire}</camunda:inputParameter>
+           <camunda:inputParameter name="employeId">${employeId}</camunda:inputParameter>
+           <camunda:inputParameter name="commentaireRH">${commentaireRH}</camunda:inputParameter>
+         </camunda:inputOutput>
+       </bpmn:extensionElements>
+       <bpmn:incoming>Flow_RejetRH</bpmn:incoming>
+       <bpmn:outgoing>Flow_EndRejetRH</bpmn:outgoing>
+     </bpmn:serviceTask>
+     <bpmn:sequenceFlow id="Flow_EndRejetRH" sourceRef="ServiceTask_EmailRejetRH" targetRef="EndEvent_RejetRH" />
+     <bpmn:endEvent id="EndEvent_RejetRH" name="End HR rejection">
+       <bpmn:incoming>Flow_EndRejetRH</bpmn:incoming>
+     </bpmn:endEvent>
+   </bpmn:process>
+   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Workflow_Conge">
+       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+         <dc:Bounds x="150" y="100" width="36" height="36" />
+         <bpmndi:BPMNLabel>
+           <dc:Bounds x="140" y="136" width="57" height="27" />
+         </bpmndi:BPMNLabel>
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_UserTask_ValidationManager" bpmnElement="UserTask_ValidationManager">
+         <dc:Bounds x="250" y="80" width="100" height="80" />
+         <bpmndi:BPMNLabel />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_Gateway_ValidationManager" bpmnElement="Gateway_ValidationManager" isMarkerVisible="true">
+         <dc:Bounds x="400" y="100" width="50" height="50" />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_EmailRejetManager" bpmnElement="ServiceTask_EmailRejetManager">
+         <dc:Bounds x="400" y="200" width="100" height="80" />
+         <bpmndi:BPMNLabel />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_RejetManager" bpmnElement="EndEvent_RejetManager">
+         <dc:Bounds x="550" y="217" width="36" height="36" />
+         <bpmndi:BPMNLabel>
+           <dc:Bounds x="524" y="253" width="89" height="40" />
+         </bpmndi:BPMNLabel>
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_UserTask_ValidationRH" bpmnElement="UserTask_ValidationRH">
+         <dc:Bounds x="500" y="80" width="100" height="80" />
+         <bpmndi:BPMNLabel />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_Gateway_ValidationRH" bpmnElement="Gateway_ValidationRH" isMarkerVisible="true">
+         <dc:Bounds x="650" y="100" width="50" height="50" />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_SendFinalApprovalEmail" bpmnElement="ServiceTask_SendFinalApprovalEmail">
+         <dc:Bounds x="750" y="80" width="100" height="80" />
+         <bpmndi:BPMNLabel />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_FinalApprouve" bpmnElement="EndEvent_FinalApprouve">
+         <dc:Bounds x="900" y="97" width="36" height="36" />
+         <bpmndi:BPMNLabel>
+           <dc:Bounds x="878" y="133" width="80" height="27" />
+         </bpmndi:BPMNLabel>
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_ServiceTask_EmailRejetRH" bpmnElement="ServiceTask_EmailRejetRH">
+         <dc:Bounds x="750" y="200" width="100" height="80" />
+         <bpmndi:BPMNLabel />
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_RejetRH" bpmnElement="EndEvent_RejetRH">
+         <dc:Bounds x="900" y="217" width="36" height="36" />
+         <bpmndi:BPMNLabel>
+           <dc:Bounds x="876" y="253" width="84" height="14" />
+         </bpmndi:BPMNLabel>
+       </bpmndi:BPMNShape>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_1" bpmnElement="Flow_1">
+         <di:waypoint x="186" y="118" />
+         <di:waypoint x="250" y="120" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_2" bpmnElement="Flow_2">
+         <di:waypoint x="350" y="120" />
+         <di:waypoint x="400" y="125" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_4" bpmnElement="Flow_4">
+         <di:waypoint x="450" y="125" />
+         <di:waypoint x="500" y="120" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_RejetManager" bpmnElement="Flow_RejetManager">
+         <di:waypoint x="425" y="150" />
+         <di:waypoint x="425" y="200" />
+         <di:waypoint x="450" y="200" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_EndRejetManager" bpmnElement="Flow_EndRejetManager">
+         <di:waypoint x="500" y="240" />
+         <di:waypoint x="550" y="235" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_5" bpmnElement="Flow_5">
+         <di:waypoint x="600" y="120" />
+         <di:waypoint x="650" y="125" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_ApprouveRH" bpmnElement="Flow_ApprouveRH">
+         <di:waypoint x="700" y="125" />
+         <di:waypoint x="750" y="120" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_FinalEmailToEnd" bpmnElement="Flow_FinalEmailToEnd">
+         <di:waypoint x="850" y="120" />
+         <di:waypoint x="900" y="115" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_RejetRH" bpmnElement="Flow_RejetRH">
+         <di:waypoint x="675" y="150" />
+         <di:waypoint x="675" y="200" />
+         <di:waypoint x="750" y="240" />
+       </bpmndi:BPMNEdge>
+       <bpmndi:BPMNEdge id="_BPMNEdge_Flow_EndRejetRH" bpmnElement="Flow_EndRejetRH">
+         <di:waypoint x="850" y="240" />
+         <di:waypoint x="900" y="235" />
+       </bpmndi:BPMNEdge>
+     </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+ </bpmn:definitions>

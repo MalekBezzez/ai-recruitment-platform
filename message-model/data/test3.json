@@ -1,0 +1,82 @@
+[
+  {
+    "message_id": "msg_043",
+    "timestamp": "2025-07-30T08:05:00Z",
+    "thread_id": "thread_1040",
+    "employee_id": "emp_009",
+    "employee_name": "Sami Bouhlel",
+    "message_text": "La réunion a été très constructive, merci à tous pour votre participation."
+  },
+  {
+    "message_id": "msg_044",
+    "timestamp": "2025-07-30T08:45:10Z",
+    "thread_id": "thread_1041",
+    "employee_id": "emp_014",
+    "employee_name": "Leila Kchaou",
+    "message_text": "Je rencontre un problème avec l'intégration CI/CD, quelqu'un peut m'aider ?"
+  },
+  {
+    "message_id": "msg_045",
+    "timestamp": "2025-07-30T09:15:00Z",
+    "thread_id": "thread_1042",
+    "employee_id": "emp_015",
+    "employee_name": "Karim Selmi",
+    "message_text": "J'ai terminé la rédaction du rapport, je le partage dans le drive."
+  },
+  {
+    "message_id": "msg_046",
+    "timestamp": "2025-07-30T09:35:50Z",
+    "thread_id": "thread_1043",
+    "employee_id": "emp_014",
+    "employee_name": "Leila Kchaou",
+    "message_text": "Je suis stressée par la deadline de fin de semaine, besoin d'un coup de main."
+  },
+  {
+    "message_id": "msg_047",
+    "timestamp": "2025-07-30T10:00:00Z",
+    "thread_id": "thread_1044",
+    "employee_id": "emp_016",
+    "employee_name": "Nada Trabelsi",
+    "message_text": "Super présentation de projet, j'ai appris beaucoup de choses."
+  },
+  {
+    "message_id": "msg_048",
+    "timestamp": "2025-07-30T10:20:30Z",
+    "thread_id": "thread_1045",
+    "employee_id": "emp_016",
+    "employee_name": "Nada Trabelsi",
+    "message_text": "On devrait organiser un brainstorming pour améliorer notre workflow."
+  },
+  {
+    "message_id": "msg_049",
+    "timestamp": "2025-07-30T10:40:00Z",
+    "thread_id": "thread_1046",
+    "employee_id": "emp_017",
+    "employee_name": "Anis Mhiri",
+    "message_text": "Je n'arrive pas à accéder à la base de données, erreur d'authentification."
+  },
+  {
+    "message_id": "msg_050",
+    "timestamp": "2025-07-30T11:05:00Z",
+    "thread_id": "thread_1047",
+    "employee_id": "emp_017",
+    "employee_name": "Anis Mhiri",
+    "message_text": "Merci pour la résolution rapide du bug de connexion !"
+  },
+  {
+    "message_id": "msg_051",
+    "timestamp": "2025-07-30T11:25:00Z",
+    "thread_id": "thread_1048",
+    "employee_id": "emp_018",
+    "employee_name": "Houda Fakhfakh",
+    "message_text": "Il faudrait mettre à jour les dépendances du projet avant la prochaine release."
+  },
+  {
+    "message_id": "msg_052",
+    "timestamp": "2025-07-30T11:45:20Z",
+    "thread_id": "thread_1049",
+    "employee_id": "emp_018",
+    "employee_name": "Houda Fakhfakh",
+    "message_text": "J'apprécie l'esprit d'équipe, super job tout le monde !"
+  }
+]

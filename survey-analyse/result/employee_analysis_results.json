@@ -1,0 +1,22 @@
+[
+  {
+    "employeeId": 4001,
+    "questionnaireId": 3001,
+    "global_satisfaction_%": 62.67,
+    "adjusted_satisfaction_%": 43.56,
+    "dissatisfaction_score_%": 22.22,
+    "satisfaction_causes": "How satisfied are you with your role? (Score: 4.0/5); Do you feel supported by your team? (Score: 2.0/2); What is your preferred work environment? (Score: 3.0/5 (limite))",
+    "dissatisfaction_causes": "What improvements would you suggest? (Score: 1.0/3)",
+    "neutral_causes": "Aucune cause significative"
+  },
+  {
+    "employeeId": 4002,
+    "questionnaireId": 3001,
+    "global_satisfaction_%": 34.22,
+    "adjusted_satisfaction_%": 0,
+    "dissatisfaction_score_%": 65.78,
+    "satisfaction_causes": "Aucune cause significative",
+    "dissatisfaction_causes": "How satisfied are you with your role? (Score: 2.0/5); Do you feel supported by your team? (Score: 1.0/2); What is your preferred work environment? (Score: 1.0/5); What improvements would you suggest? (Score: 1.0/3)",
+    "neutral_causes": "Aucune cause significative"
+  }
+]

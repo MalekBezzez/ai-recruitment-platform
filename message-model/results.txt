@@ -1,0 +1,237 @@
+Warning: Tokenizer at 'models/sentiment_encoder.joblib' is not XLMRobertaTokenizer. Using default.
+
+=== Résultats des Prédictions par Employé ===
+
+Employé: Sarah Ben Ali (ID: emp_001)
+
+Prédictions du modèle :
+Message                                                                                  Sentiment Prédit Émotion Prédite Topic Prédit          Émotion Générale      Topic Général     
+Je suis un peu stressée par la deadline de demain, on est encore loin du résultat final. Negative             Fatigue                    Délais   Émotions de malaise  Travail & Projets
+      Merci à tout le monde pour le soutien, le client était très satisfait de la démo ! Positive           Gratitude              Présentation Émotions de bien-être  Travail & Projets
+              Quelqu’un a les accès au serveur de test ? Je n’arrive pas à me connecter. Negative         Frustration               Technologie   Émotions de malaise Technique & Outils
+                    J’ai envoyé le rapport final au manager. On peut clôturer le ticket. Positive           Confiance     Échange professionnel Émotions de bien-être       Vie d’équipe
+
+Employé: Karim Jouini (ID: emp_002)
+
+Prédictions du modèle :
+Message                                                                       Sentiment Prédit Émotion Prédite Topic Prédit        Émotion Générale              Topic Général      
+Je suis un peu débordé cette semaine, je vais avoir besoin d’un coup de main. Negative         Fatigue                    Ambiance           Émotions de malaise        Vie d’équipe
+                        Le build est passé en prod sans souci. Super boulot ! Positive          Fierté           Gestion de projet         Émotions de bien-être   Travail & Projets
+        Il faudrait discuter des retards dans les livrables du sprint actuel. Negative         Demande                      Délais Interactions et communication   Travail & Projets
+                 Quelqu’un a des nouvelles de la réunion RH prévue ce matin ?  Neutral         Demande         Ressources Humaines Interactions et communication Ressources humaines
+
+Employé: Lina Mejri (ID: emp_003)
+
+Prédictions du modèle :
+Message                                                                               Sentiment Prédit Émotion Prédite Topic Prédit          Émotion Générale              Topic Général      
+                             J’adore travailler sur ce projet, ça me motive vraiment. Positive              Joie           Gestion de projet         Émotions de bien-être   Travail & Projets
+                           Merci Karim pour ton aide sur le debug, t’es le meilleur ! Positive         Gratitude          Problème Technique         Émotions de bien-être  Technique & Outils
+Je ressens une vraie fatigue mentale en ce moment, je vais lever le pied aujourd’hui. Negative           Fatigue                       Santé           Émotions de malaise Temps libre / Perso
+                 On peut faire un point rapide à 14h ? J’ai besoin de clarifications.  Neutral           Demande       Échange professionnel Interactions et communication        Vie d’équipe
+
+Employé: Anis Hammami (ID: emp_004)
+
+Prédictions du modèle :
+Message                                                                  Sentiment Prédit Émotion Prédite Topic Prédit          Émotion Générale                 Topic Général     
+         Je trouve qu’on devrait revoir l’organisation du daily meeting.  Neutral         Planification                 Réunion Émotions d'effort ou d'intention  Travail & Projets
+         Je viens de finir le script d’automatisation, tout est sur Git. Positive                Fierté             Technologie            Émotions de bien-être Technique & Outils
+C’était pas évident de gérer ce client, il faut qu’on en parle en privé. Negative                Colère          Service client              Émotions de malaise  Client / Business
+                      Est-ce que quelqu’un peut relire ma PR avant 12h ? Negative               Demande   Échange professionnel    Interactions et communication       Vie d’équipe
+
+Employé: Maya Khemiri (ID: emp_005)
+
+Prédictions du modèle :
+Message                                                                                Sentiment Prédit Émotion Prédite Topic Prédit           Émotion Générale              Topic Général      
+J’ai besoin d’un jour de congé urgent demain, je vais faire la demande tout à l’heure. Negative           Demande          Ressources Humaines Interactions et communication Ressources humaines
+                    Merci à tous pour votre travail, notre équipe est vraiment au top. Positive         Gratitude            Gestion de projet         Émotions de bien-être   Travail & Projets
+                                     Je me sens un peu exclue des dernières décisions… Negative          Embarras       Performance au travail           Émotions de malaise   Travail & Projets
+                       J’ai ajouté la dernière version du brief dans le drive partagé. Positive         Confiance        Échange professionnel         Émotions de bien-être        Vie d’équipe
+
+Employé: Yassine Trabelsi (ID: emp_006)
+
+Prédictions du modèle :
+Message                                                                    Sentiment Prédit Émotion Prédite Topic Prédit      Émotion Générale                 Topic Général    
+                             On commence la rétrospective à quelle heure ?  Neutral         Planification        Présentation Émotions d'effort ou d'intention Travail & Projets
+Je suis vraiment fier de l’équipe, tout le monde s’est dépassé ce mois-ci. Positive                Fierté   Gestion de projet            Émotions de bien-être Travail & Projets
+                   Le client a encore changé les specs... C’est frustrant. Negative           Frustration      Service client              Émotions de malaise Client / Business
+      Merci pour les retours sur la dernière version, je vais l’améliorer. Positive             Gratitude   Gestion de projet            Émotions de bien-être Travail & Projets
+
+Employé: Ines Zaier (ID: emp_007)
+
+Prédictions du modèle :
+Message                                                     Sentiment Prédit Émotion Prédite Topic Prédit           Émotion Générale                 Topic Général    
+  J’ai préparé les slides pour la présentation de vendredi. Positive         Planification             Présentation Émotions d'effort ou d'intention Travail & Projets
+         Franchement, je ne me sens pas écoutée en réunion. Negative             Tristesse                  Réunion              Émotions de malaise Travail & Projets
+   Bravo à Lina pour sa présentation, c’était super clair ! Positive             Gratitude             Présentation            Émotions de bien-être Travail & Projets
+On pourrait faire un point sur les objectifs trimestriels ? Positive         Planification   Performance au travail Émotions d'effort ou d'intention Travail & Projets
+
+Employé: Omar Chouchène (ID: emp_008)
+
+Prédictions du modèle :
+Message                                                            Sentiment Prédit Émotion Prédite Topic Prédit          Émotion Générale                 Topic Général      
+     Je vais être en télétravail aujourd’hui, mon fils est malade.  Neutral               Fatigue         Vie personnelle              Émotions de malaise Temps libre / Perso
+              Je suis content du feedback client, ça nous motive ! Positive                Fierté   Échange professionnel            Émotions de bien-être        Vie d’équipe
+On a eu un conflit dans l’équipe ce matin, on devrait en discuter. Negative                Stress   Échange professionnel              Émotions de malaise        Vie d’équipe
+                    Le rapport d’analyse est prêt pour validation. Positive         Planification   Échange professionnel Émotions d'effort ou d'intention        Vie d’équipe
+
+=== Pourcentages par Employé (Classes Générales) ===
+
+Employé: Sarah Ben Ali (ID: emp_001)
+Sentiment (%):
+  Negative: 50.0%
+  Positive: 50.0%
+Émotion Générale (%):
+  Émotions de bien-être: 50.0%
+  Émotions de malaise: 50.0%
+Topic Général (%):
+  Vie d’équipe: 25.0%
+  Travail & Projets: 50.0%
+  Technique & Outils: 25.0%
+
+Employé: Karim Jouini (ID: emp_002)
+Sentiment (%):
+  Negative: 50.0%
+  Neutral: 25.0%
+  Positive: 25.0%
+Émotion Générale (%):
+  Émotions de bien-être: 25.0%
+  Interactions et communication: 50.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Vie d’équipe: 25.0%
+  Travail & Projets: 50.0%
+  Ressources humaines: 25.0%
+
+Employé: Lina Mejri (ID: emp_003)
+Sentiment (%):
+  Negative: 25.0%
+  Neutral: 25.0%
+  Positive: 50.0%
+Émotion Générale (%):
+  Émotions de bien-être: 50.0%
+  Interactions et communication: 25.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Vie d’équipe: 25.0%
+  Travail & Projets: 25.0%
+  Technique & Outils: 25.0%
+  Temps libre / Perso: 25.0%
+
+Employé: Anis Hammami (ID: emp_004)
+Sentiment (%):
+  Negative: 50.0%
+  Neutral: 25.0%
+  Positive: 25.0%
+Émotion Générale (%):
+  Émotions de bien-être: 25.0%
+  Émotions d'effort ou d'intention: 25.0%
+  Interactions et communication: 25.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Client / Business: 25.0%
+  Vie d’équipe: 25.0%
+  Travail & Projets: 25.0%
+  Technique & Outils: 25.0%
+
+Employé: Maya Khemiri (ID: emp_005)
+Sentiment (%):
+  Negative: 50.0%
+  Positive: 50.0%
+Émotion Générale (%):
+  Émotions de bien-être: 50.0%
+  Interactions et communication: 25.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Vie d’équipe: 25.0%
+  Travail & Projets: 50.0%
+  Ressources humaines: 25.0%
+
+Employé: Yassine Trabelsi (ID: emp_006)
+Sentiment (%):
+  Negative: 25.0%
+  Neutral: 25.0%
+  Positive: 50.0%
+Émotion Générale (%):
+  Émotions de bien-être: 50.0%
+  Émotions d'effort ou d'intention: 25.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Client / Business: 25.0%
+  Travail & Projets: 75.0%
+
+Employé: Ines Zaier (ID: emp_007)
+Sentiment (%):
+  Negative: 25.0%
+  Positive: 75.0%
+Émotion Générale (%):
+  Émotions de bien-être: 25.0%
+  Émotions d'effort ou d'intention: 50.0%
+  Émotions de malaise: 25.0%
+Topic Général (%):
+  Travail & Projets: 100.0%
+
+Employé: Omar Chouchène (ID: emp_008)
+Sentiment (%):
+  Negative: 25.0%
+  Neutral: 25.0%
+  Positive: 50.0%
+Émotion Générale (%):
+  Émotions de bien-être: 25.0%
+  Émotions d'effort ou d'intention: 25.0%
+  Émotions de malaise: 50.0%
+Topic Général (%):
+  Vie d’équipe: 75.0%
+  Temps libre / Perso: 25.0%
+unhandled exception during asyncio.run() shutdown
+task: <Task finished name='Task-1' coro=<consume() done, defined at C:\Users\mustapha\Desktop\message-model\rabbit_consumer.py:108> exception=ChannelInvalidStateError('Channel closed by RPC timeout')>
+Traceback (most recent call last):
+  File "C:\Python310\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Python310\lib\asyncio\base_events.py", line 633, in run_until_complete
+    self.run_forever()
+  File "C:\Python310\lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Python310\lib\asyncio\base_events.py", line 600, in run_forever
+    self._run_once()
+  File "C:\Python310\lib\asyncio\base_events.py", line 1860, in _run_once
+    event_list = self._selector.select(timeout)
+  File "C:\Python310\lib\asyncio\windows_events.py", line 439, in select
+    self._poll(timeout)
+  File "C:\Python310\lib\asyncio\windows_events.py", line 788, in _poll
+    status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\site-packages\aio_pika\queue.py", line 573, in __anext__
+    await coroutine
+  File "C:\Python310\lib\asyncio\locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\mustapha\Desktop\message-model\rabbit_consumer.py", line 116, in consume
+    async for message in queue_iter:
+  File "C:\Python310\lib\site-packages\aio_pika\queue.py", line 595, in __anext__
+    await coroutine
+  File "C:\Python310\lib\site-packages\aio_pika\queue.py", line 421, in close
+    await self._on_close(self._amqp_queue, None)
+  File "C:\Python310\lib\site-packages\aio_pika\queue.py", line 453, in _on_close
+    await self._amqp_queue.cancel(consumer_tag)
+  File "C:\Python310\lib\site-packages\aio_pika\robust_queue.py", line 145, in cancel
+    result = await super().cancel(consumer_tag, timeout, nowait)
+  File "C:\Python310\lib\site-packages\aio_pika\queue.py", line 278, in cancel
+    return await channel.basic_cancel(
+  File "C:\Python310\lib\site-packages\aiormq\channel.py", line 499, in basic_cancel
+    return await self.rpc(
+  File "C:\Python310\lib\site-packages\aiormq\base.py", line 164, in wrap
+    return await self.create_task(func(self, *args, **kwargs))
+  File "C:\Python310\lib\site-packages\aiormq\abc.py", line 44, in __inner
+    return await self.task
+  File "C:\Python310\lib\site-packages\aiormq\channel.py", line 163, in rpc
+    raise ChannelInvalidStateError("Channel closed by RPC timeout")
+aiormq.exceptions.ChannelInvalidStateError: Channel closed by RPC timeout
+Connection to amqp://guest:******@localhost:5672/ closed. Reconnecting after 5 seconds.

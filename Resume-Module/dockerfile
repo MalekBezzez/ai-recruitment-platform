@@ -1,0 +1,40 @@
+FROM eclipse-temurin:17-jdk-alpine AS builder
+
+# 📁 Set working directory
+WORKDIR /app
+
+# 📦 Install Maven
+RUN apk add --no-cache maven
+
+# 📋 Copy Maven configuration and source code
+COPY pom.xml .
+COPY src ./src
+
+# 🛠️ Build the application, skipping tests to save time
+RUN mvn clean package -DskipTests
+
+
+
+
+
+# 🌱 Image légère JDK 17
+FROM eclipse-temurin:17-jdk-alpine
+
+# 📁 Répertoire de travail dans le conteneur
+WORKDIR /app
+
+# 👤 Créer un utilisateur non-root sécurisé
+RUN adduser -D -h /home/myuser -s /bin/sh myuser
+
+# 📦 Copier le .jar compilé avec le bon nom
+
+COPY --from=builder --chown=myuser:myuser /app/target/back-0.0.1-SNAPSHOT.jar app.jar
+
+# 🔐 Exécuter en tant que user sécurisé
+USER myuser
+
+# 🌐 Exposer le port (8091 comme dans docker-compose.yml)
+EXPOSE 8091
+
+# 🚀 Lancer l'application
+ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75", "-jar", "app.jar"]

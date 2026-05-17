@@ -1,0 +1,82 @@
+[
+  {
+    "message_id": "msg_033",
+    "timestamp": "2025-07-29T08:15:00Z",
+    "thread_id": "thread_1030",
+    "employee_id": "emp_009",
+    "employee_name": "Sami Bouhlel",
+    "message_text": "Je vais faire une pause, je sens que je perds un peu ma concentration."
+  },
+  {
+    "message_id": "msg_034",
+    "timestamp": "2025-07-29T09:05:30Z",
+    "thread_id": "thread_1031",
+    "employee_id": "emp_009",
+    "employee_name": "Sami Bouhlel",
+    "message_text": "Super boulot sur la landing page, les retours du client sont excellents !"
+  },
+  {
+    "message_id": "msg_035",
+    "timestamp": "2025-07-29T10:12:00Z",
+    "thread_id": "thread_1032",
+    "employee_id": "emp_010",
+    "employee_name": "Amina Haddad",
+    "message_text": "Il faut planifier une formation pour les nouvelles recrues ASAP."
+  },
+  {
+    "message_id": "msg_036",
+    "timestamp": "2025-07-29T10:45:00Z",
+    "thread_id": "thread_1033",
+    "employee_id": "emp_010",
+    "employee_name": "Amina Haddad",
+    "message_text": "Je ne suis pas très à l’aise avec les nouvelles consignes de sécurité."
+  },
+  {
+    "message_id": "msg_037",
+    "timestamp": "2025-07-29T07:55:00Z",
+    "thread_id": "thread_1034",
+    "employee_id": "emp_011",
+    "employee_name": "Walid Jaziri",
+    "message_text": "Est-ce que le script de migration a bien tourné cette nuit ?"
+  },
+  {
+    "message_id": "msg_038",
+    "timestamp": "2025-07-29T08:20:00Z",
+    "thread_id": "thread_1035",
+    "employee_id": "emp_011",
+    "employee_name": "Walid Jaziri",
+    "message_text": "Merci pour l’aide sur les tests hier, ça m’a vraiment soulagé !"
+  },
+  {
+    "message_id": "msg_039",
+    "timestamp": "2025-07-29T08:50:00Z",
+    "thread_id": "thread_1036",
+    "employee_id": "emp_012",
+    "employee_name": "Rania Tlili",
+    "message_text": "J’ai envoyé le deck de présentation à l’équipe marketing ce matin."
+  },
+  {
+    "message_id": "msg_040",
+    "timestamp": "2025-07-29T09:30:00Z",
+    "thread_id": "thread_1037",
+    "employee_id": "emp_012",
+    "employee_name": "Rania Tlili",
+    "message_text": "Je sens un manque de communication entre les pôles, on devrait en parler."
+  },
+  {
+    "message_id": "msg_041",
+    "timestamp": "2025-07-29T09:45:00Z",
+    "thread_id": "thread_1038",
+    "employee_id": "emp_013",
+    "employee_name": "Maher Ben Youssef",
+    "message_text": "Je vais faire la démo à 11h, si vous avez des remarques c’est le moment."
+  },
+  {
+    "message_id": "msg_042",
+    "timestamp": "2025-07-29T10:10:00Z",
+    "thread_id": "thread_1039",
+    "employee_id": "emp_013",
+    "employee_name": "Maher Ben Youssef",
+    "message_text": "Je suis satisfait des résultats du sprint, bravo à tous."
+  }
+]

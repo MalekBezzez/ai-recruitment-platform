@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+
+# npm logs
+npm-debug.log*
+
+# IDE configurations (exemple pour VSCode)
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Build output
+build/

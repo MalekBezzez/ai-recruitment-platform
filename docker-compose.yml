@@ -1,0 +1,518 @@
+version: '3.8'
+services:
+  eureka-server:
+    build: ./eureka-server
+    ports:
+      - "8761:8761"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  authentification-module:
+    build: ./Authentification
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka-server
+      - gateway-service
+      - postgresql
+      - rabbitmq
+      - camunda
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+      NLP_API_URL: http://nlp-api:8000
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: khalilsaidani0077@gmail.com
+      SPRING_MAIL_PASSWORD: kyuxbfhhfnqtuvpk
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  employee-module:
+    build: ./Employee-Module
+    ports:
+      - "8084:8084"
+    volumes:
+      - ./Employee-Module/data:/app/message-model/data
+  
+    depends_on:
+      - gateway-service
+      - leave-module
+      - postgresql
+      - rabbitmq
+      - camunda
+      - eureka-server
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+      NLP_API_URL: http://nlp-api:8000
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: khalilsaidani0077@gmail.com
+      SPRING_MAIL_PASSWORD: kyuxbfhhfnqtuvpk
+      FASTAPI_URL: http://message-model:8002/predict
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+      
+      MESSAGES_FOLDER_PATH: /app/message-model/data 
+      
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  leave-module:
+    build: ./Module-Leave
+    ports:
+      - "8087:8087"
+    depends_on:
+      - eureka-server
+      - postgresql
+      - rabbitmq
+      - camunda
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_MAIL_USERNAME: khalilsaidani0077@gmail.com
+      SPRING_MAIL_PASSWORD: kyuxbfhhfnqtuvpk
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+      NLP_API_URL: http://nlp-api:8000
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  
+  ollama:
+    image: ollama/ollama:0.3.12
+    container_name: ollama
+    networks: [app-network]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    entrypoint: ["/bin/sh","-lc","ollama serve & until ollama list >/dev/null 2>&1; do sleep 1; done; ollama pull mistral; wait"]
+    healthcheck:
+      test: ["CMD","ollama","list"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+    restart: unless-stopped
+
+
+  payslip-module:
+    build: ./Module-Payslip
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-server
+      - postgresql
+      - rabbitmq
+      - camunda
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+      NLP_API_URL: http://nlp-api:8000
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+      
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  training-consumer:
+    build:
+      context: ./Training-Recommendation
+    container_name: training-consumer
+    depends_on:
+      rabbitmq:
+        condition: service_started
+      ollama:
+        condition: service_healthy
+    environment:
+      - PYTHONUNBUFFERED=1
+      - OLLAMA_HOST=http://ollama:11434
+    networks:
+      - app-network    
+
+  nlp-api:
+    build: ./survey-analyse
+    container_name: nlp-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./survey-analyse:/app/survey-analyse
+      
+      - ./survey-analyse/config.json:/app/survey-analyse/config.json:ro
+
+    environment:
+      RABBIT_URL: amqp://guest:guest@rabbitmq:5672/
+      SPRING_BOOT_URL: http://employee-module:8084/nlp/save-results
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  postgresql:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: looyas-pfe
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [app-network]
+
+  db-script:
+    image: postgres:17
+    profiles: ["seed"]
+    depends_on:
+      postgresql:
+        condition: service_started
+    environment:
+      PGPASSWORD: admin
+      PGHOST: postgresql
+      PGUSER: postgres
+      PGDATABASE: looyas-pfe
+    volumes:
+      - ./db-init:/db-init:ro
+    entrypoint: >
+      bash -lc '
+        set -e
+        echo "[db-seed] Waiting for Postgres...";
+        until pg_isready -h "$$PGHOST" -U "$$PGUSER" -d "$$PGDATABASE" -q; do
+          sleep 1;
+        done
+        echo "[db-seed] Postgres is ready.";
+        shopt -s nullglob
+        files=(/db-init/*)
+        if [ $${#files[@]} -eq 0 ]; then
+          echo "[db-seed] No files in /db-init, nothing to run."
+          exit 0
+        fi
+        for f in /db-init/*; do
+          echo "[db-seed] Running $${f}..."
+          case "$${f}" in
+            *.sql) psql -v ON_ERROR_STOP=1 -f "$${f}" ;;
+            *.sh)  bash "$${f}" ;;
+            *)     echo "[db-seed] Skipping (unknown type): $${f}" ;;
+          esac
+        done
+        echo "[db-seed] Done."
+      '
+    networks: [app-network]  
+
+
+  rabbitmq: 
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - app-network
+      
+
+  camunda:
+    image: camunda/camunda-bpm-platform:run-7.23.0
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./workflow_camunda:/camunda/configuration/resources   # <-- auto-deploy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/engine-rest/engine"]
+      interval: 10s
+      timeout: 3s
+      retries: 20
+    networks:
+      - app-network 
+
+  # ─────────── MESSAGE-MODEL SERVICES ───────────
+  message-model:
+    build: ./message-model
+    profiles: ["optional"]
+    container_name: message-model
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./message-model/config.json:/app/config.json:ro
+    environment:
+      PYTHONUNBUFFERED: "1"
+      RABBIT_URL: amqp://guest:guest@rabbitmq:5672/
+      QUEUE_NAME: Discussion_queue
+      SPRING_BOOT_URL: http://employee-module:8084/prediction/save-result
+    command: ["/bin/sh", "-c", "chmod +x ./wait-for-rabbitmq.sh && ./wait-for-rabbitmq.sh"]
+    networks:
+      - app-network
+
+  resume-module:
+    build: ./Resume-Module
+    ports:
+      - "8091:8091"
+    depends_on:
+      - eureka-server
+      - postgresql
+      - rabbitmq
+      - camunda
+      
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: khalilsaidani0077@gmail.com
+      SPRING_MAIL_PASSWORD: kyuxbfhhfnqtuvpk
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: true
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: true
+
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+
+      FASTAPI_URL: http://message-model:8002/predict
+      NLP_API_URL: http://nlp-api:8000
+
+      # Watcher folders (adaptés pour Linux dans le conteneur)
+    
+
+      JWT_EXPIRATION: 19000000
+      JWT_SECRET: your-256-bit-secret-key-must-be-at-least-32-bytes-long
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+  
+  joboffer-module:
+    build: ./JobOffer-Module
+    ports:
+      - "8093:8093"
+    depends_on:
+      - eureka-server
+      - postgresql
+      - rabbitmq
+      - camunda
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: khalilsaidani0077@gmail.com
+      SPRING_MAIL_PASSWORD: kyuxbfhhfnqtuvpk
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "true"
+      SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "true"
+
+      # Très important : chemins DANS le conteneur
+      WATCH_FOLDER1: /app/watch/spontaneousApplication
+      WATCH_FOLDER2: /app/watch/jobOfferApplication
+
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+      NLP_API_URL: http://nlp-api:8000
+    volumes:
+      # Monte tes dossiers locaux dans le conteneur
+      - ./JobOffer-Module/watch/spontaneousApplication:/app/watch/spontaneousApplication:rw
+      - ./JobOffer-Module/watch/jobOfferApplication:/app/watch/jobOfferApplication:rw
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  career-pathing:
+      build:
+        context: ./Career-Pathing  # 👉 ton dossier (renommé ou existant)
+      container_name: career-pathing
+      depends_on:
+        - rabbitmq
+        - ollama
+      environment:
+        - PYTHONUNBUFFERED=1
+      networks:
+        - app-network
+  project-module:
+    build: ./Module-Project            # <-- folder of your Spring Boot module
+    container_name: project-module
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+      - postgresql
+      - rabbitmq
+      - camunda
+    environment:
+      # Spring Boot
+      SERVER_PORT: 8082
+
+      # DB (use service name + internal port 5432)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/looyas-pfe
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+
+      # Eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka/
+
+      # Camunda REST
+      CAMUNDA_REST_URL: http://camunda:8080/engine-rest
+
+      # RabbitMQ
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+
+      # NLP API (inside the network)
+      NLP_API_URL: http://nlp-api:8000
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    networks:
+      - app-network
+
+  cv-parser:
+    build:
+      context: ./Cv-Parsing&Matching (IA)
+    container_name: cv-parser
+    ports:
+      - "8095:8001"  # host:container
+    depends_on:
+      - rabbitmq
+      - ollama
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TESSERACT_CMD=/usr/bin/tesseract
+      - POPPLER_PATH=/usr/bin
+      - MODEL_NAME=mistral
+      - OLLAMA_HOST=http://ollama:11434
+      - EMAIL_USER=khalilsaidani0077@gmail.com
+      - EMAIL_PASS=ton_mot_de_passe
+      - EMAIL_TO=destinataire@exemple.com
+    networks:
+      - app-network
+  front:
+    build:
+      context: ./front           # <-- ajuste si nécessaire
+      dockerfile: Dockerfile     # <-- ajuste si nécessaire
+      args:
+        REACT_APP_API_URL: "http://localhost:8888"   # URL utilisée AU BUILD
+    image: front-app:latest
+    container_name: front-app
+    ports:
+      - "3000:80"               
+    depends_on:
+      -   gateway-service
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - app-network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_ui
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      # évite la demande de master password, pratique en dev
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgresql
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+    networks:
+      - app-network
+
+    
+volumes:
+  ollama:
+  pgdata:
+
+  
+networks:
+  app-network:
+    driver: bridge

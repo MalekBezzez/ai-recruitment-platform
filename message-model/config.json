@@ -1,0 +1,11 @@
+{
+  "data_path": "data/test.json",
+  "model_paths": {
+    "sentiment": "models/model_sentiment.pt",
+    "emotion": "models/model_emotion.pt",
+    "topic": "models/model_topic.pt",
+    "sentiment_encoder": "models/sentiment_encoder.joblib",
+    "emotion_encoder": "models/emotion_encoder.joblib",
+    "topic_encoder": "models/topic_encoder.joblib"
+  }
+}

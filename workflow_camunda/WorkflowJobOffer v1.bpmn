@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1l01rf5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.23.0">
+  <bpmn:process id="JobOfferRequestWorkflow" name="JobOfferRequest" isExecutable="true" camunda:historyTimeToLive="100">
+    <bpmn:startEvent id="StartEvent_1" name="Job Offer Request">
+      <bpmn:outgoing>Flow_1w7l9ix</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="UT_ManagerValidation" name="Manager validation" camunda:formKey="ManagerTask" camunda:assignee="${ManagerId}">
+      <bpmn:extensionElements />
+      <bpmn:incoming>Flow_1w7l9ix</bpmn:incoming>
+      <bpmn:outgoing>Flow_0o9wmng</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="ST_RejectManagerMessage" name="Reject Message" camunda:type="external" camunda:topic="SendMessage">
+      <bpmn:incoming>Flow_Rejected</bpmn:incoming>
+      <bpmn:outgoing>Flow_04jxkr8</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="UT_HrValidation" name="HR Validation" camunda:formKey="HrTask" camunda:candidateGroups="RH">
+      <bpmn:incoming>Flow_Approved</bpmn:incoming>
+      <bpmn:outgoing>Flow_04eidn6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_0rt2sz8" name="Decision">
+      <bpmn:incoming>Flow_0o9wmng</bpmn:incoming>
+      <bpmn:outgoing>Flow_Approved</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Rejected</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="ST_RejectRhMessage" name="Reject Message" camunda:type="external" camunda:topic="SendMessage">
+      <bpmn:incoming>Flow_05ag90j</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t9kim7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ST_ApproveMessage" name="Approve Message" camunda:type="external" camunda:topic="SendApproveMessage">
+      <bpmn:incoming>Flow_0krt47m</bpmn:incoming>
+      <bpmn:outgoing>Flow_0gptrfq</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1w7l9ix" sourceRef="StartEvent_1" targetRef="UT_ManagerValidation" />
+    <bpmn:sequenceFlow id="Flow_0o9wmng" sourceRef="UT_ManagerValidation" targetRef="Gateway_0rt2sz8" />
+    <bpmn:sequenceFlow id="Flow_Approved" name="Approved" sourceRef="Gateway_0rt2sz8" targetRef="UT_HrValidation">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{Decision =='APPROVED'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_Rejected" name="Rejected" sourceRef="Gateway_0rt2sz8" targetRef="ST_RejectManagerMessage">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{Decision =='REJECTED'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="ENDA" name="Job Offer Request Approved">
+      <bpmn:incoming>Flow_0gptrfq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="END" name="Job Offer Request Rejected">
+      <bpmn:incoming>Flow_0t9kim7</bpmn:incoming>
+      <bpmn:incoming>Flow_04jxkr8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_1im9siu" name="Decision">
+      <bpmn:incoming>Flow_04eidn6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0krt47m</bpmn:outgoing>
+      <bpmn:outgoing>Flow_05ag90j</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_04eidn6" sourceRef="UT_HrValidation" targetRef="Gateway_1im9siu" />
+    <bpmn:sequenceFlow id="Flow_0krt47m" name="Approved" sourceRef="Gateway_1im9siu" targetRef="ST_ApproveMessage">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{Decision=="APPROVED"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0gptrfq" sourceRef="ST_ApproveMessage" targetRef="ENDA" />
+    <bpmn:sequenceFlow id="Flow_05ag90j" name="Rejected" sourceRef="Gateway_1im9siu" targetRef="ST_RejectRhMessage">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{Decision =='REJECTED'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0t9kim7" sourceRef="ST_RejectRhMessage" targetRef="END" />
+    <bpmn:sequenceFlow id="Flow_04jxkr8" sourceRef="ST_RejectManagerMessage" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="JobOfferRequestWorkflow">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="142" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="138" y="165" width="47" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1t5jctm_di" bpmnElement="UT_ManagerValidation">
+        <dc:Bounds x="280" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rt2sz8_di" bpmnElement="Gateway_0rt2sz8" isMarkerVisible="true">
+        <dc:Bounds x="445" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="450" y="85" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1gx3idz_di" bpmnElement="UT_HrValidation">
+        <dc:Bounds x="590" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1im9siu_di" bpmnElement="Gateway_1im9siu" isMarkerVisible="true">
+        <dc:Bounds x="735" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="740" y="85" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1nsa4ly" bpmnElement="ST_RejectRhMessage">
+        <dc:Bounds x="820" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ithwzc_di" bpmnElement="ENDA">
+        <dc:Bounds x="1032" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1028" y="165" width="47" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09gbku2_di" bpmnElement="ST_RejectManagerMessage">
+        <dc:Bounds x="570" y="290" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1du2y7o_di" bpmnElement="END">
+        <dc:Bounds x="1032" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1006" y="274.5" width="88" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0b04rhq" bpmnElement="ST_ApproveMessage">
+        <dc:Bounds x="860" y="100" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1w7l9ix_di" bpmnElement="Flow_1w7l9ix">
+        <di:waypoint x="178" y="140" />
+        <di:waypoint x="280" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0o9wmng_di" bpmnElement="Flow_0o9wmng">
+        <di:waypoint x="380" y="140" />
+        <di:waypoint x="445" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1yb8w24_di" bpmnElement="Flow_Approved">
+        <di:waypoint x="495" y="140" />
+        <di:waypoint x="590" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="520" y="122" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ihw7j0_di" bpmnElement="Flow_Rejected">
+        <di:waypoint x="470" y="165" />
+        <di:waypoint x="470" y="330" />
+        <di:waypoint x="570" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="464" y="245" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04eidn6_di" bpmnElement="Flow_04eidn6">
+        <di:waypoint x="690" y="140" />
+        <di:waypoint x="735" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0krt47m_di" bpmnElement="Flow_0krt47m">
+        <di:waypoint x="785" y="140" />
+        <di:waypoint x="860" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="801" y="122" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05ag90j_di" bpmnElement="Flow_05ag90j">
+        <di:waypoint x="760" y="165" />
+        <di:waypoint x="760" y="260" />
+        <di:waypoint x="820" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="754" y="210" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t9kim7_di" bpmnElement="Flow_0t9kim7">
+        <di:waypoint x="920" y="260" />
+        <di:waypoint x="976" y="260" />
+        <di:waypoint x="976" y="330" />
+        <di:waypoint x="1032" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gptrfq_di" bpmnElement="Flow_0gptrfq">
+        <di:waypoint x="960" y="140" />
+        <di:waypoint x="1032" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04jxkr8_di" bpmnElement="Flow_04jxkr8">
+        <di:waypoint x="670" y="330" />
+        <di:waypoint x="1032" y="330" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

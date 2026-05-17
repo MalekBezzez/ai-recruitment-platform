@@ -1,0 +1,50 @@
+# Ignorer les fichiers de configuration locaux
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+LICENSE
+
+# Ignorer les dossiers de build et artefacts locaux
+# Ignorer les dossiers de build, sauf les JARs nécessaires
+target/*
+!target/*.jar
+build/
+out/
+dist/
+
+# Ignorer les fichiers de configuration d'IDE
+.idea/
+*.iml
+.vscode/
+*.code-workspace
+
+# Ignorer les fichiers de logs et temporaires
+*.log
+*.tmp
+*.temp
+
+# Ignorer les dépendances locales
+.mvn/
+.gradle/
+node_modules/
+
+# Ignorer les fichiers de configuration spécifiques à l'environnement
+.env
+*.env
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+# Ignorer les dossiers de tests
+src/test/
+test/
+tests/
+
+# Ignorer les fichiers de cache et autres fichiers inutiles
+*.bak
+*.swp
+*~
+.DS_Store

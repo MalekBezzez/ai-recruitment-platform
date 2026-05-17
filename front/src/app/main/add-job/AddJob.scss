@@ -1,0 +1,176 @@
+  .add-job-container {
+    width: 55%;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom:25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    .title-container {
+      display: flex;
+      margin-top: 10px;
+      margin-left:14%;
+      font-family: 'Trebuchet MS', Arial, sans-serif;
+    }
+
+    .form-container {
+      width: 75%;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+
+
+      .global-container{
+        display: flex;
+        gap: 100px;
+ 
+      }
+
+      
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        width: 400px;
+        max-width: 90%;
+        text-align: center;
+        position: relative;
+      }
+      
+      .modal-content h2 {
+        margin-bottom: 15px;
+        color: #333;
+      }
+      
+      .modal-content input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      .modal-content button {
+        padding: 10px 15px;
+        
+        cursor: pointer;
+        font-size: 16px;
+        margin: 15px;
+      }
+      
+      
+    
+
+      .left-container,
+      .right-container {
+        width: 48%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+
+        .inputlabel {
+          width: 800px;
+        }
+
+        .rm-section-btn{
+          font-size: 10px;
+        }
+
+        
+      }
+
+      label {
+        font-weight: bold;
+        
+      }
+
+      select {
+        width: 90%;
+        height: 50px;
+        padding: 8px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 140px;
+        resize: vertical; 
+      }
+
+     .all-sections-container{
+      display: flex;
+      flex-direction:column ;
+      gap: 30px;
+
+
+      .MuiInputAdornment-root {
+        position: absolute;
+        top: 9px; /* Adjust for better positioning */
+        right: 0px;
+        font-size: 2px;
+      }
+      
+      .add-section-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      
+
+      .add-section {
+        
+        
+        background-color: #111827c1;
+        color: white;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      
+    }
+
+  }
+    }
+
+    .form-actions{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 70px;
+      padding-bottom: 20px;
+      .submit-btn{
+        width:130px;
+        font-size: 15px;
+
+        font-weight:bold;
+      }
+
+    }
+
+  }
+    

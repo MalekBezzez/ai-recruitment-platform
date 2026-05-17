@@ -1,0 +1,102 @@
+[
+  {
+    "questionId": 201,
+    "questionText": "How satisfied are you with your role?",
+    "questionType": "likert",
+    "weight": 1.0,
+    "answer": "Satisfied",
+    "employeeId": 4001,
+    "scale_max": 5,
+    "likert_labels": {
+      "Very Dissatisfied": 1,
+      "Dissatisfied": 2,
+      "Neutral": 3,
+      "Satisfied": 4,
+      "Very Satisfied": 5
+    },
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 202,
+    "questionText": "Do you feel supported by your team?",
+    "questionType": "boolean",
+    "weight": 0.8,
+    "answer": "true",
+    "employeeId": 4001,
+    "scale_max": 2,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 203,
+    "questionText": "What is your preferred work environment?",
+    "questionType": "choice",
+    "weight": 1.2,
+    "answer": "3",
+    "employeeId": 4001,
+    "scale_max": 5,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 204,
+    "questionText": "What improvements would you suggest?",
+    "questionType": "text",
+    "weight": 1.5,
+    "answer": "More flexible hours and better communication tools would be great.",
+    "employeeId": 4001,
+    "scale_max": 5,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 201,
+    "questionText": "How satisfied are you with your role?",
+    "questionType": "likert",
+    "weight": 1.0,
+    "answer": "Dissatisfied",
+    "employeeId": 4002,
+    "scale_max": 5,
+    "likert_labels": {
+      "Very Dissatisfied": 1,
+      "Dissatisfied": 2,
+      "Neutral": 3,
+      "Satisfied": 4,
+      "Very Satisfied": 5
+    },
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 202,
+    "questionText": "Do you feel supported by your team?",
+    "questionType": "boolean",
+    "weight": 0.8,
+    "answer": "false",
+    "employeeId": 4002,
+    "scale_max": 2,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 203,
+    "questionText": "What is your preferred work environment?",
+    "questionType": "choice",
+    "weight": 1.2,
+    "answer": "1",
+    "employeeId": 4002,
+    "scale_max": 5,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  },
+  {
+    "questionId": 204,
+    "questionText": "What improvements would you suggest?",
+    "questionType": "text",
+    "weight": 1.5,
+    "answer": "The workload is too high and needs better distribution.",
+    "employeeId": 4002,
+    "scale_max": 5,
+    "likert_labels": null,
+    "questionnaireId": 3001
+  }
+]

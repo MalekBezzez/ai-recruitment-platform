@@ -1,0 +1,11 @@
+__pycache__/
+*.pt
+*.bin
+*.log
+*.json
+*.csv
+*.ipynb
+.git
+venv/
+.idea/
+.DS_Store

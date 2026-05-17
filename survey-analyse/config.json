@@ -1,0 +1,12 @@
+{
+    "input_json_path": "C:\\Users\\mustapha\\Desktop\\survey-analyse\\employee_questionnaire_responses.json",
+    "model_path": "C:\\Users\\mustapha\\Desktop\\survey-analyse\\xlm_roberta_final",
+    "output_json_path": "C:\\Users\\mustapha\\Desktop\\survey-analyse\\results\\employee_analysis_results.json"
+,
+  "rabbit_url": "amqp://guest:guest@rabbitmq:5672/",
+  "rabbit_queue": "nlp_analysis_queue",
+  "spring_boot_save_url": "http://localhost:8084/nlp/save-results",
+  "spring_boot_push_url": "http://employee-module:8084/notifications/external/push"
+
+
+}

@@ -1,0 +1,27 @@
+FROM python:3.10-slim
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les dépendances
+COPY requirements.txt .
+
+# Installer les dépendances système minimales + Python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    
+    && pip install --no-cache-dir -r requirements.txt \
+    && apt-get remove -y build-essential \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y netcat-openbsd && apt-get clean
+
+# Copier le script de démarrage et les sources
+COPY wait-for-rabbitmq.sh .
+COPY . .
+
+# Donner les droits d’exécution au script
+RUN chmod +x wait-for-rabbitmq.sh
+
+# Démarrage via le script d’attente
+CMD ["./wait-for-rabbitmq.sh"]

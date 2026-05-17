@@ -1,0 +1,258 @@
+[
+  {
+    "message_id": "msg_001",
+    "timestamp": "2025-07-28T08:45:12Z",
+    "thread_id": "thread_1001",
+    "employee_id": "emp_001",
+    "employee_name": "Sarah Ben Ali",
+    "message_text": "Je suis un peu stressée par la deadline de demain, on est encore loin du résultat final."
+  },
+  {
+    "message_id": "msg_002",
+    "timestamp": "2025-07-28T09:01:32Z",
+    "thread_id": "thread_1002",
+    "employee_id": "emp_001",
+    "employee_name": "Sarah Ben Ali",
+    "message_text": "Merci à tout le monde pour le soutien, le client était très satisfait de la démo !"
+  },
+  {
+    "message_id": "msg_003",
+    "timestamp": "2025-07-28T09:47:50Z",
+    "thread_id": "thread_1003",
+    "employee_id": "emp_001",
+    "employee_name": "Sarah Ben Ali",
+    "message_text": "Quelqu’un a les accès au serveur de test ? Je n’arrive pas à me connecter."
+  },
+  {
+    "message_id": "msg_004",
+    "timestamp": "2025-07-28T10:05:12Z",
+    "thread_id": "thread_1004",
+    "employee_id": "emp_001",
+    "employee_name": "Sarah Ben Ali",
+    "message_text": "J’ai envoyé le rapport final au manager. On peut clôturer le ticket."
+  },
+  {
+    "message_id": "msg_005",
+    "timestamp": "2025-07-28T08:32:11Z",
+    "thread_id": "thread_1001",
+    "employee_id": "emp_002",
+    "employee_name": "Karim Jouini",
+    "message_text": "Je suis un peu débordé cette semaine, je vais avoir besoin d’un coup de main."
+  },
+  {
+    "message_id": "msg_006",
+    "timestamp": "2025-07-28T09:12:22Z",
+    "thread_id": "thread_1005",
+    "employee_id": "emp_002",
+    "employee_name": "Karim Jouini",
+    "message_text": "Le build est passé en prod sans souci. Super boulot !"
+  },
+  {
+    "message_id": "msg_007",
+    "timestamp": "2025-07-28T10:15:45Z",
+    "thread_id": "thread_1006",
+    "employee_id": "emp_002",
+    "employee_name": "Karim Jouini",
+    "message_text": "Il faudrait discuter des retards dans les livrables du sprint actuel."
+  },
+  {
+    "message_id": "msg_008",
+    "timestamp": "2025-07-28T11:00:00Z",
+    "thread_id": "thread_1007",
+    "employee_id": "emp_002",
+    "employee_name": "Karim Jouini",
+    "message_text": "Quelqu’un a des nouvelles de la réunion RH prévue ce matin ?"
+  },
+  {
+    "message_id": "msg_009",
+    "timestamp": "2025-07-28T08:12:10Z",
+    "thread_id": "thread_1008",
+    "employee_id": "emp_003",
+    "employee_name": "Lina Mejri",
+    "message_text": "J’adore travailler sur ce projet, ça me motive vraiment."
+  },
+  {
+    "message_id": "msg_010",
+    "timestamp": "2025-07-28T08:40:23Z",
+    "thread_id": "thread_1009",
+    "employee_id": "emp_003",
+    "employee_name": "Lina Mejri",
+    "message_text": "Merci Karim pour ton aide sur le debug, t’es le meilleur !"
+  },
+  {
+    "message_id": "msg_011",
+    "timestamp": "2025-07-28T09:30:55Z",
+    "thread_id": "thread_1010",
+    "employee_id": "emp_003",
+    "employee_name": "Lina Mejri",
+    "message_text": "Je ressens une vraie fatigue mentale en ce moment, je vais lever le pied aujourd’hui."
+  },
+  {
+    "message_id": "msg_012",
+    "timestamp": "2025-07-28T10:05:00Z",
+    "thread_id": "thread_1002",
+    "employee_id": "emp_003",
+    "employee_name": "Lina Mejri",
+    "message_text": "On peut faire un point rapide à 14h ? J’ai besoin de clarifications."
+  },
+  {
+    "message_id": "msg_013",
+    "timestamp": "2025-07-28T07:50:14Z",
+    "thread_id": "thread_1011",
+    "employee_id": "emp_004",
+    "employee_name": "Anis Hammami",
+    "message_text": "Je trouve qu’on devrait revoir l’organisation du daily meeting."
+  },
+  {
+    "message_id": "msg_014",
+    "timestamp": "2025-07-28T08:25:44Z",
+    "thread_id": "thread_1012",
+    "employee_id": "emp_004",
+    "employee_name": "Anis Hammami",
+    "message_text": "Je viens de finir le script d’automatisation, tout est sur Git."
+  },
+  {
+    "message_id": "msg_015",
+    "timestamp": "2025-07-28T09:20:00Z",
+    "thread_id": "thread_1013",
+    "employee_id": "emp_004",
+    "employee_name": "Anis Hammami",
+    "message_text": "C’était pas évident de gérer ce client, il faut qu’on en parle en privé."
+  },
+  {
+    "message_id": "msg_016",
+    "timestamp": "2025-07-28T09:58:11Z",
+    "thread_id": "thread_1003",
+    "employee_id": "emp_004",
+    "employee_name": "Anis Hammami",
+    "message_text": "Est-ce que quelqu’un peut relire ma PR avant 12h ?"
+  },
+  {
+    "message_id": "msg_017",
+    "timestamp": "2025-07-28T08:00:00Z",
+    "thread_id": "thread_1014",
+    "employee_id": "emp_005",
+    "employee_name": "Maya Khemiri",
+    "message_text": "J’ai besoin d’un jour de congé urgent demain, je vais faire la demande tout à l’heure."
+  },
+  {
+    "message_id": "msg_018",
+    "timestamp": "2025-07-28T08:45:30Z",
+    "thread_id": "thread_1015",
+    "employee_id": "emp_005",
+    "employee_name": "Maya Khemiri",
+    "message_text": "Merci à tous pour votre travail, notre équipe est vraiment au top."
+  },
+  {
+    "message_id": "msg_019",
+    "timestamp": "2025-07-28T09:10:10Z",
+    "thread_id": "thread_1016",
+    "employee_id": "emp_005",
+    "employee_name": "Maya Khemiri",
+    "message_text": "Je me sens un peu exclue des dernières décisions…"
+  },
+  {
+    "message_id": "msg_020",
+    "timestamp": "2025-07-28T09:55:55Z",
+    "thread_id": "thread_1017",
+    "employee_id": "emp_005",
+    "employee_name": "Maya Khemiri",
+    "message_text": "J’ai ajouté la dernière version du brief dans le drive partagé."
+  },
+  {
+    "message_id": "msg_021",
+    "timestamp": "2025-07-28T07:45:45Z",
+    "thread_id": "thread_1018",
+    "employee_id": "emp_006",
+    "employee_name": "Yassine Trabelsi",
+    "message_text": "On commence la rétrospective à quelle heure ?"
+  },
+  {
+    "message_id": "msg_022",
+    "timestamp": "2025-07-28T08:33:33Z",
+    "thread_id": "thread_1019",
+    "employee_id": "emp_006",
+    "employee_name": "Yassine Trabelsi",
+    "message_text": "Je suis vraiment fier de l’équipe, tout le monde s’est dépassé ce mois-ci."
+  },
+  {
+    "message_id": "msg_023",
+    "timestamp": "2025-07-28T09:41:41Z",
+    "thread_id": "thread_1020",
+    "employee_id": "emp_006",
+    "employee_name": "Yassine Trabelsi",
+    "message_text": "Le client a encore changé les specs... C’est frustrant."
+  },
+  {
+    "message_id": "msg_024",
+    "timestamp": "2025-07-28T10:10:10Z",
+    "thread_id": "thread_1021",
+    "employee_id": "emp_006",
+    "employee_name": "Yassine Trabelsi",
+    "message_text": "Merci pour les retours sur la dernière version, je vais l’améliorer."
+  },
+  {
+    "message_id": "msg_025",
+    "timestamp": "2025-07-28T08:12:00Z",
+    "thread_id": "thread_1022",
+    "employee_id": "emp_007",
+    "employee_name": "Ines Zaier",
+    "message_text": "J’ai préparé les slides pour la présentation de vendredi."
+  },
+  {
+    "message_id": "msg_026",
+    "timestamp": "2025-07-28T08:35:00Z",
+    "thread_id": "thread_1023",
+    "employee_id": "emp_007",
+    "employee_name": "Ines Zaier",
+    "message_text": "Franchement, je ne me sens pas écoutée en réunion."
+  },
+  {
+    "message_id": "msg_027",
+    "timestamp": "2025-07-28T09:22:00Z",
+    "thread_id": "thread_1024",
+    "employee_id": "emp_007",
+    "employee_name": "Ines Zaier",
+    "message_text": "Bravo à Lina pour sa présentation, c’était super clair !"
+  },
+  {
+    "message_id": "msg_028",
+    "timestamp": "2025-07-28T10:00:00Z",
+    "thread_id": "thread_1025",
+    "employee_id": "emp_007",
+    "employee_name": "Ines Zaier",
+    "message_text": "On pourrait faire un point sur les objectifs trimestriels ?"
+  },
+  {
+    "message_id": "msg_029",
+    "timestamp": "2025-07-28T07:55:00Z",
+    "thread_id": "thread_1026",
+    "employee_id": "emp_008",
+    "employee_name": "Omar Chouchène",
+    "message_text": "Je vais être en télétravail aujourd’hui, mon fils est malade."
+  },
+  {
+    "message_id": "msg_030",
+    "timestamp": "2025-07-28T08:48:00Z",
+    "thread_id": "thread_1027",
+    "employee_id": "emp_008",
+    "employee_name": "Omar Chouchène",
+    "message_text": "Je suis content du feedback client, ça nous motive !"
+  },
+  {
+    "message_id": "msg_031",
+    "timestamp": "2025-07-28T09:33:00Z",
+    "thread_id": "thread_1028",
+    "employee_id": "emp_008",
+    "employee_name": "Omar Chouchène",
+    "message_text": "On a eu un conflit dans l’équipe ce matin, on devrait en discuter."
+  },
+  {
+    "message_id": "msg_032",
+    "timestamp": "2025-07-28T10:20:00Z",
+    "thread_id": "thread_1029",
+    "employee_id": "emp_008",
+    "employee_name": "Omar Chouchène",
+    "message_text": "Le rapport d’analyse est prêt pour validation."
+  }
+]

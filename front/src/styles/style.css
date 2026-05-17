@@ -1,0 +1,9 @@
+@media (max-width: 640px) {
+    .MuiPaper-root {
+        padding: 20px; 
+    }
+
+    .MuiTypography-body1 {
+        font-size: 2rem; 
+    }
+}
